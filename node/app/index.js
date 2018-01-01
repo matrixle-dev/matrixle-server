@@ -12,11 +12,11 @@ server.use((request, response, next) => {
   next();
 });
 
-server.use((request, response, next) => {
-  response.status(404).json({
-      status: 404
-  });
-});
+// server.use((request, response, next) => {
+//   response.status(200).json({
+//       status: 200
+//   });
+// });
 
 server.get('/', (request, response) => {
   console.log(request.url);
@@ -24,8 +24,6 @@ server.get('/', (request, response) => {
       chance: request.chance
   });
   // response.send('Hello from Express!')
-
-
 });
 
 server.listen(port, (err) => {
