@@ -1,6 +1,9 @@
 const express = require('express');
 const server = express();
-const port = 4444;
+const port = 4488;
+
+bodyParser = require('body-parser');
+server.use(bodyParser.json());
 
 // server.use((request, response, next) => {
 //   request.chance = Math.random();
@@ -18,11 +21,21 @@ const port = 4444;
 //   });
 // });
 
-server.get('/random', (request, response) => {
+server.get('/', (request, response) => {
   console.log(request.url);
-  response.json({
-      chance: Math.random()
-  });
+  console.log(request.body)
+  
+  requestObj = JSON.parse(require('url').parse(request.url));
+  
+  if (requestObj.user_name == "mofan"
+      && requestObj.passwd == "mofan") {
+      response.json({result: true});
+      console.log("access granted");
+  } else {
+      console.log(requestObj);
+      response.json({result: false});
+      console.log("access denied");
+  }
   // response.send('Hello from Express!')
 });
 
